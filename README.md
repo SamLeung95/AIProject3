@@ -1,4 +1,6 @@
-~~~Installation~~~
+~~~~~~~~~~~~~~~~~
+
+~~Installation~~
 
 Following must be installed:
 -Numpy
@@ -21,8 +23,9 @@ However, if the pkl files do not work, follow these steps:
 -Each image must also be the same size, have the same bit depth, and have the same type (Only 24 bit dept .jpgs have been tested)
 *******
 ~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+~~Usage~~
 
-~~~Usage~~~
 ---Classifying---
 
 Images can be classified in 2 ways
