@@ -1,21 +1,25 @@
 
 # coding: utf-8
 
-# In[15]:
+# In[1]:
 
 from PIL import Image
+from PIL import ImageFilter
 from functools import reduce
 import numpy as np
 import matplotlib.pyplot as plt
 import time
 import os
 import sys
+import math
+import random
+from scipy.ndimage.filters import gaussian_filter
 from sklearn.externals import joblib
 import warnings
 from sklearn import svm
 
 
-# In[16]:
+# In[2]:
 
 def getMean(arr):
     
@@ -48,7 +52,7 @@ def threshold(img_arr, img_name):
     return newArr
 
 
-# In[17]:
+# In[3]:
 
 def img_to_array(img_path):
     
@@ -56,12 +60,96 @@ def img_to_array(img_path):
     img = img.resize((100,100), Image.ANTIALIAS)
     img = np.array(img)
     img = threshold(img, img_path)
+    img = gaussian_filter(img, sigma=2)
     img = img.ravel()
     
     return img
 
 
-# In[20]:
+# In[4]:
+
+def test_acc():
+
+    random.seed(422)
+    
+    image_names=[]
+    training=[]
+    classification=[]
+               
+    img_dir=input("Enter training set location: ")
+    img_dir_2=[img_dir + "\\" + d for d in os.listdir(img_dir)]
+    img_classes=[d for d in os.listdir(img_dir)]
+    
+    k_input=input("How many times: ")
+
+    for directories in img_dir_2:
+        image_names.append([d for d in os.listdir(directories)])
+                
+    for classes in range(len(img_classes)):
+        
+        for image_name in range(len(image_names[classes])):
+            file_loc=img_dir + "\\" + img_classes[classes] + "\\" + image_names[classes][image_name]
+            training.append(img_to_array(file_loc))
+            classification.append(img_classes[classes])
+    
+    combined_array=list(zip(training, classification))
+    random.shuffle(combined_array)
+    training, classification = zip(*combined_array)
+    
+    bin_size=math.floor(len(training)/int(k_input))
+    test_bin=[]
+    test_bin_class=[]
+    testing=[]
+    classes=[]
+    correct=0
+    incorrect=0
+    count=0
+    
+    for item in range(len(training)):
+        if count==bin_size:
+            count=0
+            testing.append(test_bin)
+            classes.append(test_bin_class)
+            test_bin=[]
+            test_bin_class=[]
+            
+        test_bin.append(training[item])
+        test_bin_class.append(classification[item])
+        count+=1
+        
+    clf = svm.LinearSVC()
+    
+    for x in range(len(testing)):
+        validation=testing[x]
+        validation_class=classes[x]
+        final_arr=[]
+        final_class=[]
+        
+        for y in range(1,len(testing)):
+            final_arr.extend(testing[(x+y)%len(testing)])
+            final_class.extend(classes[(x+y)%len(testing)])
+        
+        clf.fit(final_arr, final_class)
+        
+        for z in range(len(validation)):
+            print("Class: ", validation_class[z])
+            print("Prediction: ")
+            prediction=clf.predict(validation[z])
+            print(prediction)
+            if validation_class[z]==prediction:
+                print("correct!")
+                correct+=1
+            else:
+                print("Incorrect :C")
+                incorrect+=1
+    print("Correct: ", correct)
+    print("Inorrect: ", incorrect)
+    print("Final accuracy:",correct/(correct+incorrect),"%")
+    
+    os._exit(1)
+
+
+# In[ ]:
 
 def main():
     
@@ -80,10 +168,10 @@ def main():
                 else:
                     clf = joblib.load('SVMdump.pkl') 
                     print(clf.predict(img_to_array(img_name)))
-                sys.exit()
+                os._exit(1)
                     
-            elif len(sys.argv)==1:
-                user_input=input("Train or classify image: ")
+            #elif len(sys.argv)==1:
+            user_input=input("(T)rain, (c)lassify image, or te(s)t for accuracy: ")
             
             if(user_input.lower()=="t" or user_input.lower()=="train"):
                 image_names=[]
@@ -142,9 +230,11 @@ def main():
                             print("Not a valid choice. Chose (y)es or (n)o.")
                     
                 loop=False
-                
+            
+            elif(user_input.lower()=="s" or user_input.lower()=="test"):
+                test_acc()
             elif(user_input.lower()=="exit"):
-                sys.exit()
+                os._exit(1)
                 
             else:
                 
@@ -160,8 +250,7 @@ def main():
             print("Invalid image, please try again.")
 
 
-
-# In[19]:
+# In[ ]:
 
 main()
 
