@@ -149,7 +149,7 @@ def test_acc():
     os._exit(1)
 
 
-# In[ ]:
+# In[5]:
 
 def main():
     
@@ -170,8 +170,8 @@ def main():
                     print(clf.predict(img_to_array(img_name)))
                 os._exit(1)
                     
-            #elif len(sys.argv)==1:
-            user_input=input("(T)rain, (c)lassify image, or te(s)t for accuracy: ")
+            elif len(sys.argv)==1:
+                user_input=input("(T)rain, (c)lassify image, or te(s)t for accuracy: ")
             
             if(user_input.lower()=="t" or user_input.lower()=="train"):
                 image_names=[]
@@ -250,7 +250,7 @@ def main():
             print("Invalid image, please try again.")
 
 
-# In[ ]:
+# In[6]:
 
 main()
 
