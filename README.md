@@ -30,7 +30,7 @@ However, if the pkl files do not work, follow these steps:
 ---Classifying---
 
 Images can be classified in 2 ways
--Through command line (Unable to test, recommended not to use)
+-Through command line
 -From inside the program
 
 **note**
