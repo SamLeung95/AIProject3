@@ -167,7 +167,7 @@ def main():
                     print("Invalid file name.")
                 else:
                     clf = joblib.load('SVMdump.pkl') 
-                    print(clf.predict(img_to_array(img_name)))
+                    print(clf.predict(img_to_array(sys.argv[1])))
                 os._exit(1)
                     
             elif len(sys.argv)==1:
