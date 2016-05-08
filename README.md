@@ -56,4 +56,10 @@ You can also classify the images inside the program:
 6.) You will be given a choice to classify another image, type 'y' or 'yes' to chose another, and 'n' or 'no' to exit
 7.) If 'yes' is chosen, go back to step 4
 
+=================
+
+This program can also do cross-validation by entering 's' or 'test' when the first prompt comes up.
+However, since this was for internal testing purposes only, there is little to no error checking.
+
+=================
 ~~~~~~~~~~~~~~~~~
