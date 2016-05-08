@@ -171,7 +171,7 @@ def main():
                 os._exit(1)
                     
             elif len(sys.argv)==1:
-                user_input=input("(T)rain, (c)lassify image, or te(s)t for accuracy: ")
+                user_input=input("(T)rain, (c)lassify image, te(s)t for accuracy, or 'e(x)it': ")
             
             if(user_input.lower()=="t" or user_input.lower()=="train"):
                 image_names=[]
@@ -233,7 +233,7 @@ def main():
             
             elif(user_input.lower()=="s" or user_input.lower()=="test"):
                 test_acc()
-            elif(user_input.lower()=="exit"):
+            elif(user_input.lower()=="x" or user_input.lower()=="exit"):
                 os._exit(1)
                 
             else:
