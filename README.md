@@ -7,6 +7,7 @@ Following must be installed:
 -Pillow
 -matplotlib
 -sklearn
+-scipy
 
 ----Training----
 Included are the pkl files so there is no need to train the SVM.
@@ -18,10 +19,10 @@ However, if the pkl files do not work, follow these steps:
 3.) Type 't' or 'train' (Without quotes and it is case insensitive)
 4.) Next, type the name of the folder with the training set ('Training', in this case. Also without quotes)
 
-*note**
+**note**
 -Training sets must have subfolders with appropriate names signifying what the images within should be classified as
 -Each image must also be the same size, have the same bit depth, and have the same type (Only 24 bit dept .jpgs have been tested)
-*******
+********
 ~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~
 ~~Usage~~
@@ -32,9 +33,9 @@ Images can be classified in 2 ways
 -Through command line (Unable to test, recommended not to use)
 -From inside the program
 
-*note**
+**note**
 SVM must be trained first!
-*******
+********
 
 =================
 
