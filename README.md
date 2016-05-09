@@ -9,6 +9,8 @@ Following must be installed:
 -sklearn
 -scipy
 
+The easiest way for Windows users is to download Anaconda, install it, and use the Anaconda prompt.
+
 ----Training----
 Included are the pkl files so there is no need to train the SVM.
 However, if the pkl files do not work, follow these steps:
